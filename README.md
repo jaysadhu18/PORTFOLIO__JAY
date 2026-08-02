@@ -37,9 +37,9 @@ Edit files under `src/data/`:
 - `public/images/tech/*.webp`
 - Confirm LinkedIn / GitHub URLs in `src/data/site.ts`
 
-## GSAP Club
+## GSAP
 
-`ScrollSmoother` and `SplitText` need a [GSAP Club](https://gsap.com/docs/v3/Installation/) license for production. This repo currently uses `gsap-trial` for local development only — **do not ship trial plugins to production**.
+Uses the standard `gsap` package (`ScrollSmoother`, `SplitText`, `ScrollTrigger`). GSAP bonus plugins are free — do **not** use `gsap-trial` (it blocks production hosts).
 
 ## Attribution
 
@@ -56,13 +56,6 @@ See `animated_portfolio_plan_4427cfd8.plan.md`.
 | 6 Work pin scrub + Tech physics | Done |
 | 7 Meta, reduced-motion, favicon | Done |
 
-### Production note (GSAP Club)
-
-Local/dev uses `gsap-trial` for `ScrollSmoother` + `SplitText`. **Do not deploy trial to a custom domain** — it will break. Before production:
-
-1. Get a [GSAP Club](https://gsap.com/pricing/) license, **or**
-2. Replace ScrollSmoother/SplitText with free alternatives (Lenis + CSS/manual split)
-
 ### Deploy
 
 ```bash
@@ -70,5 +63,4 @@ npm run build
 npm run preview
 ```
 
-Then host `dist/` on Vercel/Netlify (after resolving GSAP Club).
-# PORTFOLIO__JAY
+Then host `dist/` on Vercel/Netlify.
