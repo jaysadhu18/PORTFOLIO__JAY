@@ -1,0 +1,152 @@
+.about {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.about-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: min(58vh, 520px);
+}
+
+.about-visual__glow {
+  position: absolute;
+  left: 42%;
+  top: 48%;
+  width: min(95%, 420px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(235, 228, 223, 0.4) 0%,
+    rgba(235, 228, 223, 0.1) 42%,
+    transparent 70%
+  );
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.about-visual__orb {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-visual__orb--a {
+  right: 8%;
+  top: 22%;
+  width: clamp(2.5rem, 5vw, 3.75rem);
+  height: clamp(2.5rem, 5vw, 3.75rem);
+  opacity: 0.7;
+  filter: blur(1px);
+}
+
+.about-visual__orb--b {
+  left: 6%;
+  bottom: 18%;
+  width: clamp(1.25rem, 2.5vw, 1.85rem);
+  height: clamp(1.25rem, 2.5vw, 1.85rem);
+  opacity: 0.4;
+}
+
+.about-visual__img {
+  position: relative;
+  z-index: 1;
+  height: min(58vh, 520px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+.about-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+}
+
+.about-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.about-headline__accent {
+  color: var(--accent);
+}
+
+.about-body {
+  font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+  line-height: 1.7;
+  color: rgba(200, 214, 226, 0.88);
+  margin-bottom: 1.75rem;
+}
+
+.about-body__accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.about-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--ui-panel);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 0 rgba(200, 210, 220, 0);
+  transition:
+    box-shadow 0.35s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-resume:hover {
+  background: rgba(235, 228, 223, 0.12);
+  box-shadow: 0 0 28px rgba(235, 228, 223, 0.4);
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-visual {
+    min-height: min(42vh, 380px);
+  }
+
+  .about-visual__img {
+    height: min(42vh, 380px);
+  }
+
+  .about-copy {
+    max-width: none;
+  }
+}

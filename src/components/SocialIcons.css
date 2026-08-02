@@ -1,0 +1,112 @@
+/* Sit on viewport edges — never inside the content column */
+.icons-section {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 35;
+  width: 100%;
+  max-width: none;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.icons-section--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.social-icons {
+  position: absolute;
+  left: 0.65rem;
+  bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  pointer-events: auto;
+}
+
+.social-icons span {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+}
+
+.social-icons a {
+  --siLeft: 50%;
+  --siTop: 50%;
+  position: absolute;
+  left: var(--siLeft);
+  top: var(--siTop);
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 1.05rem;
+  color: var(--fg-muted);
+  background: var(--ui-panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  will-change: left, top;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.social-icons a:hover {
+  color: var(--accent);
+  border-color: rgba(235, 228, 223, 0.4);
+}
+
+.resume-button {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 1.5rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--fg-muted);
+  background: var(--ui-panel);
+  border: 1px solid var(--line);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  pointer-events: auto;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.resume-button:hover {
+  color: var(--fg);
+  border-color: rgba(235, 228, 223, 0.4);
+}
+
+.resume-button > span {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .social-icons {
+    display: none;
+  }
+
+  .resume-button {
+    bottom: 1rem;
+    right: 0.5rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .icons-section {
+    display: none;
+  }
+}

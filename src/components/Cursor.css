@@ -1,0 +1,54 @@
+.cursor-main {
+  --size: 0px;
+  position: fixed;
+  top: calc(var(--size) / -2);
+  left: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 55;
+  background-color: var(--accent);
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition:
+    width 0.3s ease-out,
+    height 0.3s ease-out,
+    top 0.3s ease-out,
+    left 0.3s ease-out,
+    opacity 0.3s ease;
+}
+
+.cursor-main--active {
+  opacity: 0.9;
+}
+
+.cursor-icons {
+  top: 8px;
+  left: 8px;
+  height: calc(var(--cursorH, 44px) - 16px);
+  width: 28px;
+  border-radius: 8px;
+  transition: all 0.45s ease-out;
+}
+
+.cursor-disable {
+  --size: 0px;
+  opacity: 0;
+}
+
+@media (pointer: fine) and (min-width: 900px) {
+  .cursor-main--active {
+    --size: 44px;
+  }
+
+  .cursor-disable {
+    --size: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-main {
+    display: none;
+  }
+}
