@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
-import { site } from "../data";
 import "./Navbar.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -60,16 +59,6 @@ export function Navbar() {
 
   return (
     <header className="site-header">
-      <a
-        href="#landing"
-        className="site-brand"
-        data-href="#landing"
-        data-cursor="disable"
-        aria-label={site.name}
-      >
-        <span className="site-brand__name">{site.name}</span>
-      </a>
-
       <nav className="site-nav" aria-label="Primary">
         <ul className="site-nav__pill">
           {NAV_LINKS.map((link) => (

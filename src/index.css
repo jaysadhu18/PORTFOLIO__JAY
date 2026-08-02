@@ -117,6 +117,14 @@ button {
 #what-i-do,
 #career {
   background: var(--bg);
+}
+
+#about {
+  overflow: visible;
+}
+
+#what-i-do,
+#career {
   overflow: hidden;
 }
 
