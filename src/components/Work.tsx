@@ -1,135 +1,175 @@
-import { useEffect, useRef, useState } from "react";
-import { FiArrowUpRight, FiGithub } from "react-icons/fi";
-import { githubProfile, work } from "../data";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { FiArrowUpRight, FiChevronDown, FiGithub } from "react-icons/fi";
+import { githubProfile, work, type WorkItem } from "../data";
+import { ProjectVisual } from "./ProjectVisual";
+import { Reveal } from "../motion/Reveal";
+import { EASE } from "../motion/variants";
 import "./Work.css";
 
-/** Featured projects for the Habib-style carousel; fall back to all */
-const projects = work.filter((p) => p.featured).length
-  ? work.filter((p) => p.featured)
-  : work;
+const featured = work.filter((p) => p.caseStudy);
+const rest = work.filter((p) => !p.caseStudy);
 
 export function Work() {
-  const railRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-
-    const update = () => {
-      const cards = rail.querySelectorAll<HTMLElement>(".work-card");
-      if (!cards.length) return;
-      const mid = rail.scrollLeft + rail.clientWidth / 2;
-      let best = 0;
-      let bestDist = Infinity;
-      cards.forEach((card, i) => {
-        const center = card.offsetLeft + card.offsetWidth / 2;
-        const dist = Math.abs(center - mid);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = i;
-        }
-      });
-      setActive(best);
-    };
-
-    update();
-    rail.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      rail.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
-  const scrollTo = (index: number) => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const card = rail.querySelectorAll<HTMLElement>(".work-card")[index];
-    card?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  };
-
   return (
     <section className="work-section section" id="work">
       <div className="container work-head">
-        <p className="section__label">Work</p>
-        <h2 className="section__title title">
+        <Reveal as="p" className="section__label">
+          Work
+        </Reveal>
+        <Reveal as="h2" className="section__title title">
           I make incredible <br />
           <span className="work-head__accent">projects.</span>
-        </h2>
-        <p className="work-hint">
-          Swipe or scroll ·{" "}
+        </Reveal>
+        <Reveal as="p" className="work-hint">
+          {work.length} projects · {featured.length} featured case studies ·{" "}
           <a href={githubProfile} target="_blank" rel="noreferrer">
             github.com/jaysadhu18
           </a>
-        </p>
+        </Reveal>
       </div>
 
-      <div className="work-rail" ref={railRef} data-cursor="disable">
-        {projects.map((item, i) => {
-          const n = String(i + 1).padStart(2, "0");
-          const href = item.demo || item.link;
-          return (
-            <article key={item.id} className="work-card">
-              <div className="work-card__blob" aria-hidden />
-
-              <div className="work-card__number">
-                <span className="work-card__index">{n}</span>
-                <span className="work-card__category">{item.category ?? "Web"}</span>
-              </div>
-
-              <div className="work-card__data">
-                <h3 className="work-card__title">{item.title}</h3>
-                <p className="work-card__subtitle">Techstack used</p>
-                <p className="work-card__stack">{item.stack.join(", ")}</p>
-              </div>
-
-              <div className="work-card__image">
-                <div className="work-card__media" aria-hidden>
-                  <span className="work-card__media-index">{n}</span>
-                </div>
-                {href && (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="work-card__go"
-                    aria-label={`Open ${item.title}`}
-                  >
-                    <FiArrowUpRight size={22} />
-                  </a>
-                )}
-              </div>
-
-              {item.link && item.demo && (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="work-card__code"
-                >
-                  <FiGithub size={14} /> Code
-                </a>
-              )}
-            </article>
-          );
-        })}
-      </div>
-
-      <div className="work-dots" role="tablist" aria-label="Projects">
-        {projects.map((item, i) => (
-          <button
-            key={item.id}
-            type="button"
-            role="tab"
-            aria-selected={i === active}
-            aria-label={`Go to ${item.title}`}
-            className={`work-dot${i === active ? " is-active" : ""}`}
-            data-cursor="disable"
-            onClick={() => scrollTo(i)}
-          />
+      <div className="container case-studies">
+        {featured.map((item, i) => (
+          <CaseStudyCard key={item.id} item={item} index={i} />
         ))}
       </div>
+
+      {rest.length > 0 && (
+        <div className="container more-projects">
+          <Reveal as="h3" className="more-projects__title">
+            More projects
+          </Reveal>
+          <div className="more-projects__grid">
+            {rest.map((item) => (
+              <ProjectCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
+  );
+}
+
+function CaseStudyCard({ item, index }: { item: WorkItem; index: number }) {
+  const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
+  const reversed = index % 2 === 1;
+  const caseStudy = item.caseStudy;
+
+  return (
+    <motion.article
+      className={`case-study${reversed ? " case-study--reverse" : ""}`}
+      initial={reduce ? undefined : "hidden"}
+      whileInView={reduce ? undefined : "show"}
+      viewport={{ once: true, amount: 0.25 }}
+      variants={{
+        hidden: { opacity: 0, y: 32 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
+      }}
+    >
+      <div className="case-study__visual">
+        <ProjectVisual category={item.category} title={item.title} />
+      </div>
+
+      <div className="case-study__body">
+        <span className="case-study__index">{String(index + 1).padStart(2, "0")}</span>
+        <p className="case-study__category">{item.category ?? "Web"}</p>
+        <h3 className="case-study__title">{item.title}</h3>
+        <p className="case-study__summary">{item.summary}</p>
+
+        <ul className="case-study__stack">
+          {item.stack.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+
+        {caseStudy && (
+          <>
+            <button
+              type="button"
+              className="case-study__toggle"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+            >
+              {open ? "Hide case study" : "Read case study"}
+              <FiChevronDown className={`case-study__chevron${open ? " is-open" : ""}`} />
+            </button>
+            <div className={`case-study__detail${open ? " is-open" : ""}`}>
+              <div className="case-study__detail-inner">
+                <h4>Problem</h4>
+                <p>{caseStudy.problem}</p>
+                <h4>Key features</h4>
+                <ul>
+                  {caseStudy.features.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+                <h4>My contribution</h4>
+                <p>{caseStudy.contribution}</p>
+              </div>
+            </div>
+          </>
+        )}
+
+        <div className="case-study__links">
+          {item.link && (
+            <a href={item.link} target="_blank" rel="noreferrer" className="case-study__link">
+              <FiGithub size={15} /> Code
+            </a>
+          )}
+          {item.demo && (
+            <a
+              href={item.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="case-study__link case-study__link--primary"
+            >
+              Live demo <FiArrowUpRight size={15} />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function ProjectCard({ item }: { item: WorkItem }) {
+  const reduce = useReducedMotion();
+
+  return (
+    <motion.article
+      className="mini-card"
+      initial={reduce ? undefined : "hidden"}
+      whileInView={reduce ? undefined : "show"}
+      viewport={{ once: true, amount: 0.4 }}
+      variants={{
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+      }}
+      whileHover={reduce ? undefined : { y: -6 }}
+      transition={{ duration: 0.3, ease: EASE }}
+    >
+      <div className="mini-card__visual">
+        <ProjectVisual category={item.category} title={item.title} />
+      </div>
+      <div className="mini-card__body">
+        <p className="mini-card__category">{item.category ?? "Web"}</p>
+        <h4 className="mini-card__title">{item.title}</h4>
+        <p className="mini-card__summary">{item.summary}</p>
+        <div className="mini-card__links">
+          {item.link && (
+            <a href={item.link} target="_blank" rel="noreferrer" aria-label={`${item.title} code on GitHub`}>
+              <FiGithub size={14} />
+            </a>
+          )}
+          {item.demo && (
+            <a href={item.demo} target="_blank" rel="noreferrer" aria-label={`${item.title} live demo`}>
+              <FiArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   );
 }

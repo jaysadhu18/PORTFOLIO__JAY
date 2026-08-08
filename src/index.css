@@ -1,21 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap");
 
 :root {
-  /* Studio taupe from chrome-melt video — site-wide */
-  --bg: #766868;
-  --bg-deep: #5f5252;
-  --bg-elevated: #857474;
-  --bg-soft: #8f7e7a;
-  --fg: #f4efed;
-  --fg-muted: #d8cfcc;
-  --accent: #ebe4df;
-  --accent-dim: #c9bfba;
-  --accent-glow: rgba(235, 228, 223, 0.22);
-  --line: rgba(244, 239, 237, 0.18);
+  /* True dark neutrals, warm undertone to pair with the peach accent */
+  --bg: #14110f;
+  --bg-deep: #0c0a09;
+  --bg-elevated: #211c19;
+  --bg-soft: #2a2320;
+  --fg: #f5f1ee;
+  --fg-muted: #b8aea7;
+  --accent: #f2b78a;
+  --accent-dim: #d99f72;
+  --accent-glow: rgba(242, 183, 138, 0.28);
+  --line: rgba(245, 241, 238, 0.12);
   --danger: #f87171;
-  --studio: #766868;
-  --studio-soft: #957f7a;
-  --ui-panel: rgba(26, 29, 34, 0.78);
+  --studio: #14110f;
+  --studio-soft: #1c1714;
+  --ui-panel: rgba(8, 6, 5, 0.82);
+
+  /* Card surfaces — layered above --bg for depth */
+  --bg-card: linear-gradient(160deg, rgba(245, 241, 238, 0.06), rgba(10, 8, 7, 0.5));
+  --bg-card-hover: linear-gradient(160deg, rgba(245, 241, 238, 0.1), rgba(10, 8, 7, 0.55));
+  --card-border: rgba(245, 241, 238, 0.1);
+  --card-border-hover: rgba(242, 183, 138, 0.45);
+  --shadow-lift: 0 24px 48px -16px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(245, 241, 238, 0.05);
+  --shadow-rest: 0 8px 24px -12px rgba(0, 0, 0, 0.5);
 
   --font-display: "Syne", sans-serif;
   --font-body: "DM Sans", sans-serif;
@@ -61,8 +69,8 @@ body {
   overflow-y: hidden;
   height: 100%;
   background:
-    radial-gradient(ellipse 80% 50% at 18% -8%, rgba(235, 228, 223, 0.14), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 90% 10%, rgba(149, 127, 122, 0.35), transparent 50%),
+    radial-gradient(ellipse 80% 50% at 18% -8%, rgba(242, 183, 138, 0.1), transparent 55%),
+    radial-gradient(ellipse 55% 40% at 90% 10%, rgba(42, 35, 32, 0.6), transparent 50%),
     linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 40%, var(--bg-soft) 100%);
 }
 

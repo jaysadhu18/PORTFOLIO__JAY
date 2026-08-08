@@ -43,14 +43,20 @@
   position: relative;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border-radius: clamp(1.25rem, 2.5vw, 1.75rem);
-  border: 1px solid rgba(232, 241, 248, 0.1);
-  background: var(--bg-deep);
+  border: 1px solid var(--card-border);
+  background: var(--bg-card);
   overflow: hidden;
-  transition: border-color 0.3s ease;
+  box-shadow: var(--shadow-rest);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
 }
 
 .tech-block:hover {
-  border-color: rgba(235, 228, 223, 0.35);
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-lift);
+  background: var(--bg-card-hover);
 }
 
 .tech-block__glow {
@@ -61,7 +67,7 @@
   height: 70%;
   background: radial-gradient(
     circle,
-    rgba(235, 228, 223, calc(0.16 - var(--block-i) * 0.012)) 0%,
+    rgba(242, 183, 138, calc(0.2 - var(--block-i) * 0.014)) 0%,
     transparent 70%
   );
   pointer-events: none;
@@ -94,6 +100,9 @@
 }
 
 .tech-pills li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.4rem 0.85rem;
   border: 1px solid rgba(232, 241, 248, 0.3);
   border-radius: 999px;
@@ -104,13 +113,27 @@
   transition:
     border-color 0.25s ease,
     color 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.tech-pill__icon {
+  flex-shrink: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--accent-dim);
+  transition: color 0.25s ease;
+}
+
+.tech-pills li:hover .tech-pill__icon {
+  color: var(--accent);
 }
 
 .tech-pills li:hover {
-  border-color: rgba(235, 228, 223, 0.55);
+  border-color: var(--card-border-hover);
   color: var(--accent);
-  background: rgba(235, 228, 223, 0.1);
+  background: rgba(242, 183, 138, 0.12);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {

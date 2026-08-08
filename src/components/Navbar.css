@@ -32,14 +32,11 @@
   list-style: none;
   padding: 0.35rem;
   border-radius: 999px;
-  background: rgba(26, 29, 34, 0.5);
   border: 1px solid rgba(244, 239, 237, 0.14);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 28px rgba(40, 32, 30, 0.18);
 }
 
 .site-nav__pill a {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,13 +47,30 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: rgba(244, 239, 237, 0.88);
-  transition: background 0.2s ease, color 0.2s ease;
+  color: rgba(244, 239, 237, 0.72);
+  transition: color 0.25s ease;
 }
 
 .site-nav__pill a:hover {
   color: #fff;
-  background: rgba(244, 239, 237, 0.12);
+}
+
+.site-nav__pill a.is-active {
+  color: var(--bg-deep);
+}
+
+.site-nav__label {
+  position: relative;
+  z-index: 1;
+}
+
+.site-nav__active-pill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 6px 18px rgba(242, 183, 138, 0.35);
 }
 
 @media (max-width: 720px) {

@@ -24,17 +24,13 @@
   justify-content: center;
 }
 
-.career-item__rail::before {
-  content: "";
+.career-item__line {
   position: absolute;
   top: 0.55rem;
   bottom: -2.25rem;
   width: 1px;
-  background: var(--line);
-}
-
-.career-item:last-child .career-item__rail::before {
-  display: none;
+  background: linear-gradient(180deg, var(--accent-dim), var(--line));
+  transform-origin: top;
 }
 
 .career-item__dot {

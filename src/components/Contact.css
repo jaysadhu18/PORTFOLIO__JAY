@@ -26,11 +26,15 @@
   letter-spacing: -0.02em;
   word-break: break-word;
   overflow-wrap: anywhere;
-  transition: opacity 0.25s ease;
+  text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition:
+    opacity 0.25s ease,
+    text-shadow 0.35s ease;
 }
 
 .contact-email:hover {
-  opacity: 0.85;
+  opacity: 0.92;
+  text-shadow: 0 0 24px var(--accent-glow);
 }
 
 .contact-phone {

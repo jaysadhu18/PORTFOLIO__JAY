@@ -1,3 +1,9 @@
+export type CaseStudy = {
+  problem: string;
+  features: string[];
+  contribution: string;
+};
+
 export type WorkItem = {
   id: string;
   title: string;
@@ -8,7 +14,8 @@ export type WorkItem = {
   category?: string;
   link?: string;
   demo?: string;
-  featured?: boolean;
+  /** Deeper case-study detail — only set for projects the resume documents in detail */
+  caseStudy?: CaseStudy;
 };
 
 /**
@@ -25,7 +32,19 @@ export const work: WorkItem[] = [
     stack: ["Next.js", "PostgreSQL", "Prisma", "Groq", "Gemini", "React Flow"],
     image: "/images/work/careersense.webp",
     link: "https://github.com/jaysadhu18/careersence",
-    featured: true,
+    caseStudy: {
+      problem:
+        "Students and early-career job seekers lack one place to explore career paths, get a personalized roadmap, and prep application materials.",
+      features: [
+        "Interactive career-tree visualization built with React Flow",
+        "Adaptive career quizzes and personalized roadmaps",
+        "Resume parsing and AI-driven college recommendations",
+        "Groq AI + Gemini integration for intelligent career guidance",
+        "Secure auth with NextAuth.js and a role-based admin dashboard",
+      ],
+      contribution:
+        "Built full-stack — the Prisma/PostgreSQL data layer and NextAuth.js auth, the React Flow career-tree UI, and the Groq/Gemini integration for AI guidance.",
+    },
   },
   {
     id: "ai-agent",
@@ -35,7 +54,18 @@ export const work: WorkItem[] = [
       "Agentic AI that turns natural language into executable workflows — LangGraph planning, Git/terminal execution, memory, and Telegram reporting.",
     stack: ["Python", "FastAPI", "LangGraph", "Groq", "Telegram", "SQLite"],
     image: "/images/work/ai-agent.webp",
-    featured: true,
+    caseStudy: {
+      problem:
+        "Turning natural-language instructions into safe, reliable automated actions usually means custom scripting for every task.",
+      features: [
+        "LangGraph-based planning that converts natural language into executable workflows",
+        "Secure automation framework: task planning, Git integration, Python/terminal execution",
+        "Persistent memory across runs",
+        "Automated reporting back through a Telegram bot interface",
+      ],
+      contribution:
+        "Designed and built the agent end-to-end with FastAPI, LangGraph, and Groq LLMs, including the execution sandboxing and the Telegram reporting layer.",
+    },
   },
   {
     id: "sign-language",
@@ -46,7 +76,18 @@ export const work: WorkItem[] = [
     stack: ["Python", "OpenCV", "MediaPipe", "scikit-learn", "Streamlit"],
     image: "/images/work/sign-language.webp",
     link: "https://github.com/jaysadhu18/SIGN-LANGUAGE-DETECTION-",
-    featured: true,
+    caseStudy: {
+      problem:
+        "Real-time communication accessibility for sign-language users needs fast, accurate gesture recognition that works live, not just on static images.",
+      features: [
+        "Real-time webcam hand-gesture detection with MediaPipe landmark tracking",
+        "Random Forest classification across A–Z plus common tokens",
+        "Live gesture-to-text conversion",
+        "Streamlit UI for accessible, no-install use",
+      ],
+      contribution:
+        "Built the full computer-vision pipeline — MediaPipe landmark extraction, model training/evaluation, and the live Streamlit interface.",
+    },
   },
   {
     id: "ai-assistant",
@@ -57,7 +98,6 @@ export const work: WorkItem[] = [
     stack: ["Flutter", "Dart", "ChatGPT", "DALL·E", "Hive"],
     image: "/images/work/ai-assistant.webp",
     link: "https://github.com/jaysadhu18/AI-ASSISTANT-APP",
-    featured: true,
   },
   {
     id: "expense-tracker",
@@ -69,7 +109,6 @@ export const work: WorkItem[] = [
     image: "/images/work/expense.webp",
     link: "https://github.com/jaysadhu18/Expense-Tracker",
     demo: "https://expense-tracker-omega-five-74.vercel.app",
-    featured: true,
   },
   {
     id: "globetrotter",
@@ -80,7 +119,6 @@ export const work: WorkItem[] = [
     stack: ["React", "TypeScript", "Node.js", "MongoDB", "Tailwind"],
     image: "/images/work/globetrotter.webp",
     link: "https://github.com/PremT0301/Globe-Trotter-",
-    featured: true,
   },
   {
     id: "healthcare",
@@ -90,7 +128,18 @@ export const work: WorkItem[] = [
       "Cross-platform healthcare apps with offline-first SQLite sync, multilingual UX, patient management, and resilient REST APIs.",
     stack: ["React Native", "Node.js", "SQLite", "REST"],
     image: "/images/work/healthcare.webp",
-    featured: true,
+    caseStudy: {
+      problem:
+        "Healthcare workers in low-connectivity areas need patient-management apps that keep working — and stay in sync — when the network doesn't.",
+      features: [
+        "Offline-first architecture with SQLite-based local storage",
+        "Background sync, caching, and pagination once connectivity returns",
+        "Multilingual UX for frontline health workers",
+        "Secure REST API integration with validation and performance tuning",
+      ],
+      contribution:
+        "Built the React Native apps and the offline-sync layer — SQLite caching/pagination, validation, and REST API integration — across both Poshan Rath and Swasthya Nagaram.",
+    },
   },
   {
     id: "search-directory",
@@ -102,7 +151,6 @@ export const work: WorkItem[] = [
     image: "/images/work/search.webp",
     link: "https://github.com/jaysadhu18/Search-Directory-",
     demo: "https://search-directory.vercel.app",
-    featured: true,
   },
   {
     id: "recipe-generator",
@@ -113,7 +161,6 @@ export const work: WorkItem[] = [
     stack: ["React", "APIs", "JavaScript"],
     image: "/images/work/recipe.webp",
     link: "https://github.com/PremT0301/RECIPE-GENERATOR",
-    featured: true,
   },
   {
     id: "sign-language-alt",

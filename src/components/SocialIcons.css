@@ -56,7 +56,7 @@
 
 .social-icons a:hover {
   color: var(--accent);
-  border-color: rgba(235, 228, 223, 0.4);
+  border-color: var(--card-border-hover);
 }
 
 .resume-button {
@@ -83,7 +83,7 @@
 
 .resume-button:hover {
   color: var(--fg);
-  border-color: rgba(235, 228, 223, 0.4);
+  border-color: var(--card-border-hover);
 }
 
 .resume-button > span {

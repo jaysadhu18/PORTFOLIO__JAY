@@ -32,22 +32,18 @@
   display: block;
   width: 100%;
   height: 100%;
+  filter: brightness(0.82) contrast(1.02) saturate(0.88);
 }
 
-/* Soft left for text + bottom fade into About (kills hard partition) */
+/* Soft left for text legibility + subtle vignette (no bottom band — was showing as a hard seam) */
 .melt-veil {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 2;
   background:
-    linear-gradient(90deg, rgba(95, 82, 82, 0.58) 0%, rgba(95, 82, 82, 0.22) 30%, transparent 50%),
-    linear-gradient(
-      0deg,
-      var(--bg) 0%,
-      rgba(118, 104, 104, 0.85) 18%,
-      rgba(118, 104, 104, 0) 42%
-    );
+    radial-gradient(ellipse 90% 70% at 50% 50%, transparent 45%, rgba(12, 10, 9, 0.3) 100%),
+    linear-gradient(90deg, rgba(12, 10, 9, 0.72) 0%, rgba(12, 10, 9, 0.36) 30%, transparent 52%);
 }
 
 .melt-drum {
@@ -133,6 +129,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.82) contrast(1.02) saturate(0.88);
 }
 
 .melt-drum--static {

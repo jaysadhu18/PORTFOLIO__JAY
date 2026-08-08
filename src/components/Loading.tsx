@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLoading } from "../context/LoadingProvider";
 import { landing, site } from "../data";
+import { EASE } from "../motion/variants";
 import "./Loading.css";
 
 type LoadingProps = {
@@ -11,6 +13,7 @@ export function Loading({ percent }: LoadingProps) {
   const { setIsLoading } = useLoading();
   const [showWelcome, setShowWelcome] = useState(false);
   const [wipe, setWipe] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     if (percent < 100) return;
@@ -48,7 +51,21 @@ export function Loading({ percent }: LoadingProps) {
   const marqueeItems = [...landing.roles, ...landing.roles, ...landing.roles];
 
   return (
-    <div className="loading-root" aria-busy="true" aria-live="polite">
+    <motion.div
+      className="loading-root"
+      aria-busy="true"
+      aria-live="polite"
+      exit={
+        reduce
+          ? { opacity: 0, pointerEvents: "none", transition: { duration: 0.25, ease: "linear" } }
+          : {
+              opacity: 0,
+              scale: 1.04,
+              pointerEvents: "none",
+              transition: { duration: 1, ease: EASE },
+            }
+      }
+    >
       <header className="loading-header">
         <span className="loading-brand">{site.name}</span>
         <span className="loading-meta">{site.location}</span>
@@ -78,7 +95,7 @@ export function Loading({ percent }: LoadingProps) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

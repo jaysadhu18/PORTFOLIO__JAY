@@ -5,6 +5,7 @@ import { WhatIDo } from "./WhatIDo";
 import { Career } from "./Career";
 import { Work } from "./Work";
 import { TechStack } from "./TechStack";
+import { Achievements } from "./Achievements";
 import { Contact } from "./Contact";
 import { Navbar } from "./Navbar";
 import { SocialIcons } from "./SocialIcons";
@@ -31,6 +32,7 @@ export function MainContainer({ children }: Props) {
           <Career />
           <Work />
           <TechStack />
+          <Achievements />
           <Contact />
           {children}
         </div>

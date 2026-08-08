@@ -6,6 +6,7 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Loading } from "../components/Loading";
 import { setProgress } from "../components/utils/setProgress";
 
@@ -41,7 +42,7 @@ export function LoadingProvider({ children }: PropsWithChildren) {
 
   return (
     <LoadingContext.Provider value={value}>
-      {isLoading && <Loading percent={loading} />}
+      <AnimatePresence>{isLoading && <Loading key="loading" percent={loading} />}</AnimatePresence>
       <main className={`main-body${isLoading ? "" : " main-active"}`}>{children}</main>
     </LoadingContext.Provider>
   );

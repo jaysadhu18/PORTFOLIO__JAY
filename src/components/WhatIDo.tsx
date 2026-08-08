@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { whatIDo } from "../data";
+import { Reveal, RevealGroup, RevealItem } from "../motion/Reveal";
 import "./WhatIDo.css";
 
 export function WhatIDo() {
@@ -8,16 +9,23 @@ export function WhatIDo() {
   return (
     <section id="what-i-do" className="section whatido">
       <div className="container">
-        <p className="section__label">{whatIDo.title}</p>
-        <h2 className="section__title title">Two lanes. One stack.</h2>
+        <Reveal as="p" className="section__label">
+          {whatIDo.title}
+        </Reveal>
+        <Reveal as="h2" className="section__title title">
+          Two lanes. One stack.
+        </Reveal>
 
-        <div className="whatido-panels">
+        <RevealGroup as="div" className="whatido-panels" stagger={0.14}>
           {whatIDo.panels.map((panel) => {
             const open = openId === panel.id;
             return (
-              <article
+              <RevealItem
                 key={panel.id}
+                as="article"
                 className={`whatido-panel${open ? " is-open" : ""}`}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 onMouseEnter={() => {
                   if (window.matchMedia("(pointer: fine)").matches) {
                     setOpenId(panel.id);
@@ -32,10 +40,10 @@ export function WhatIDo() {
                 <div className="whatido-panel__edge" aria-hidden />
                 <h3 className="whatido-panel__title">{panel.title}</h3>
                 <p className="whatido-panel__body">{panel.body}</p>
-              </article>
+              </RevealItem>
             );
           })}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );
